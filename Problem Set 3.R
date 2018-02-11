@@ -21,21 +21,27 @@ PlayGame.door(door) #test function
 
 #S4
 
-setClass(Class="door", representation = representation(doorNum = "integer"), prototype = prototype(doorNum = c())) #
+setClass(Class="door", representation = representation(doorNum = "integer"), prototype = prototype(doorNum = c())) #S4 creation of door class. doorNum set to require integer
 
+#this isn't working for some reason
 setValidity("door", function(object){
-  if(!is.integer(object@doorNum)){
-    return("doorNum must be of type numeric when in class 'door'")
+  if(!is.integer(object@doorNum)){ #if object at doorNum is not an integer
+    return(print("doorNum must be of type numeric when in class 'door'"))
+  }
+  if(object@doorNum > 1 & object@doorNum < 3){#if object at doorNum is not between 1 and 3 
+    return(print("Yo, you got to pick a number between 1 and 3"))
   }
 })
 
-#setMethod("initialize", "door", function(.Object, ...){
-#  value = callNextMethod()
-#  validObject(value)
- # return(value)
-#})
+#what do you do?
+setMethod("initialize", "door", function(.Object, ...){
+  value = callNextMethod()
+  validObject(value)
+  return(value)
+})
 
 class(3)
-door<- new("door", doorNum = as.integer(2))
+door<- new("door", doorNum = as.integer(5))
 door@doorNum
 
+setGeneric("PlayGame", function(object){standardGeneric("PlayGame")})
