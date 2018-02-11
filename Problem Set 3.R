@@ -41,7 +41,18 @@ setMethod("initialize", "door", function(.Object, ...){
 })
 
 class(3)
-door<- new("door", doorNum = as.integer(5))
+door<- new("door", doorNum = as.integer(2))
 door@doorNum
 
 setGeneric("PlayGame", function(object){standardGeneric("PlayGame")})
+setMethod("PlayGame", "door", function(object){ 
+  doorNum <- object@doorNum #sets doorNum equal to the number inside the x object
+  car <- sample(1:3,1) #places the "car" inside a random "door": one two or three
+  if(identical(doorNum,car)){ #if doorNum and car are identical. 
+    return("You win a brand new car!") 
+  }
+  else{ #if doorNum, and car are not identical
+    return("I am sorry, you picked wrong")
+  }
+})
+PlayGame(door)
