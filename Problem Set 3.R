@@ -26,10 +26,10 @@ setClass(Class="door", representation = representation(doorNum = "integer"), pro
 #this isn't working for some reason
 setValidity("door", function(object){
   if(!is.integer(object@doorNum)){ #if object at doorNum is not an integer
-    return(print("doorNum must be of type numeric when in class 'door'"))
+    return("doorNum must be of type integer when in class 'door'")
   }
-  if(object@doorNum > 1 & object@doorNum < 3){#if object at doorNum is not between 1 and 3 
-    return(print("Yo, you got to pick a number between 1 and 3"))
+  if(object@doorNum < 1 | object@doorNum > 3){#if object at doorNum is not between 1 and 3 
+    return("Yo, you got to pick a number between 1 and 3")
   }
 })
 
@@ -40,9 +40,9 @@ setMethod("initialize", "door", function(.Object, ...){
   return(value)
 })
 
-class(3)
-door<- new("door", doorNum = as.integer(2))
-door@doorNum
+
+door<- new("door", doorNum = as.integer(6))
+
 
 setGeneric("PlayGame", function(object){standardGeneric("PlayGame")})
 setMethod("PlayGame", "door", function(object){ 
