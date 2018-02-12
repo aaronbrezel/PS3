@@ -21,21 +21,22 @@ sort.student <- function(x, y){ #sort.student method
   a = matrix(c(x$courage, x$ambition, x$intelligence, x$effort), ncol = 1)
   b = y%*%a
   if(identical(b[1], max(b))){
-    return("GRIFFINDOR!")
+    return("Griffindor")
   } else if(identical(b[2], max(b))){
-    return("SYLTHERIN!")
+    return("Slytherin")
   } else if(identical(b[3], max(b))){
-    return("RAVENCLAW!")
+    return("Ravenclaw")
   } else if(identical(b[4], max(b))){
-    return("HUFFLEPUFF!")
+    return("Hufflepuff")
   } else{
-    return("I can't decide!")
+    return("Undecided")
   }
 }
 
 
-sort.student(harry,matrixStats)
-
+house <- sort.student(harry,matrixStats)
+print(house)
+harry <- structure(harry, class = c("student", house)) #gives harry a second class based on the house he was sorted into
 #4
 
 Gryffindor_Tower <- new.env()
@@ -43,6 +44,10 @@ Black_Lake <- new.env()
 Ravenclaw_Tower <- new.env()
 Basement <- new.env()
 
+library(pryr)
+where("harry") 
+environment(harry) <- Ravenclaw_Tower
+where("harry")
 curfew <- function(x){
   UseMethod("curfew",x)
 }
