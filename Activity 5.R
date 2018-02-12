@@ -1,35 +1,53 @@
 #Activity 5: The Sorting Hat!
 
-studentmaker <- function(person){
-name1 <- person
-ambition1 <- sample(1:100,1)
-intelligence1 <- sample(1:100,1)
-courage1 <- sample(1:100,1)
-effort1 <- sample(1:100,1)
-student <- list(name = name1,courage = courage1,ambition = ambition1,intelligence = intelligence1,effort = effort1)
-class(student) <- "student"
-return(student)
+studentmaker <- function(person){ #function that create an object of class students
+  name1 <- person #name of the sudent
+  ambition1 <- sample(1:100,1) #next 4 lines are values for the four major character traits
+  intelligence1 <- sample(1:100,1)
+  courage1 <- sample(1:100,1)
+  effort1 <- sample(1:100,1)
+  student <- list(name = name1,courage = courage1,ambition = ambition1,intelligence = intelligence1,effort = effort1) #creation of a student list object with a name plus all four character traits 
+  class(student) <- "student" #sets class of student to student
+  return(student) #returns newly created list object
 }
-harry <- studentmaker("Harry")
 
-matrixStats <- matrix(sample(1:100,16), nrow = 4)
+harry <- studentmaker("Harry") #creates a student called Harry
+matrixStats <- matrix(sample(1:100,16), nrow = 4) #creates a matrix
 
-sort.student <- function(x, y){
-  if(!identical(length(y), 16)) {
-    return("Second argument must be a matrix with 16 cells")
+sort.student <- function(x, y){ #sort.student method
+  if(nrow(y) != 4 | ncol(y) != 4) { #checks is the matrix being fed in as right right size 
+    return("Second argument must be a 4x4 matrix")
   }
-  a = c(x$courage, x$ambition, x$intelligence, x$effort)
-  b = y*a
+  a = matrix(c(x$courage, x$ambition, x$intelligence, x$effort), ncol = 1)
+  b = y%*%a
   if(identical(b[1], max(b))){
     return("GRIFFINDOR!")
   } else if(identical(b[2], max(b))){
-      return("SYLTHERIN!")
+    return("SYLTHERIN!")
   } else if(identical(b[3], max(b))){
     return("RAVENCLAW!")
-  } else if(identical(b[1], max(b))){
+  } else if(identical(b[4], max(b))){
     return("HUFFLEPUFF!")
   } else{
     return("I can't decide!")
   }
 }
 
+
+sort.student(harry,matrixStats)
+
+#4
+
+Gryffindor_Tower <- new.env()
+Black_Lake <- new.env()
+Ravenclaw_Tower <- new.env()
+Basement <- new.env()
+
+curfew <- function(x){
+  UseMethod("curfew",x)
+}
+
+curfew.Gryffindor <- function(x){
+  
+  
+}
