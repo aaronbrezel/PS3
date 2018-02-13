@@ -40,7 +40,7 @@ setMethod("initialize", "door", function(.Object, ...){
 })
 
 
-door<- new("door", doorNum = as.integer(3))
+door<- new("door", doorNum = as.numeric(3))
 
 
 setGeneric("PlayGame", function(object){standardGeneric("PlayGame")})
